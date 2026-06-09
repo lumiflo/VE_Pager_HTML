@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumiflo - Virtual Entertainment</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #0a0a0a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      position: relative;
+      display: inline-block;
+      max-width: 943px;
+      width: 100%;
+    }
+    img#main {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    /* 클릭 영역 오버레이 */
+    .hotspot {
+      position: absolute;
+      cursor: pointer;
+      /* 개발 확인용: border: 2px solid rgba(255,255,0,0.5); */
+    }
+    .hotspot:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <img id="main" src="VE_HTML_Source.png" alt="Lumiflo VE Pager" usemap="#vemap">
+
+    <!-- 이미지맵 (원본 943x2000 기준 좌표) -->
+    <map name="vemap">
+      <!-- MY:RAKL YouTube -->
+      <area shape="rect" coords="30,1843,311,1870"
+            href="https://www.youtube.com/live/d6JMU5EJX7c?si=Mt1zte04Uhl2d9WO"
+            target="_blank" alt="MY:RAKL YouTube">
+      <!-- Plan.B Music YouTube -->
+      <area shape="rect" coords="329,1843,611,1870"
+            href="https://youtu.be/QmycldYpVaM?si=WcsCUUzo4cUOSraX"
+            target="_blank" alt="Plan.B Music YouTube">
+      <!-- Weekly Challenge YouTube -->
+      <area shape="rect" coords="629,1843,909,1870"
+            href="https://youtube.com/shorts/qhMSbxEUyb8?si=Bt3s64XNZ09-aXLK"
+            target="_blank" alt="Weekly Challenge YouTube">
+      <!-- 문의하기 -->
+      <area shape="rect" coords="753,1914,885,1964"
+            href="https://lumiflo.channel.io/home"
+            target="_blank" alt="문의하기">
+    </map>
+  </div>
+
+  <script>
+    // 이미지 리사이즈 시 이미지맵 좌표 자동 스케일링
+    const img = document.getElementById('main');
+    const originalWidth = 943;
+    const originalHeight = 2000;
+
+    function scaleMap() {
+      const scaleX = img.offsetWidth / originalWidth;
+      const scaleY = img.offsetHeight / originalHeight;
+
+      const areas = document.querySelectorAll('map[name="vemap"] area');
+      const origCoords = [
+        [30, 1843, 311, 1870],   // MY:RAKL
+        [329, 1843, 611, 1870],  // Plan.B
+        [629, 1843, 909, 1870],  // Weekly
+        [753, 1914, 885, 1964],  // 문의하기
+      ];
+
+      areas.forEach((area, i) => {
+        const [x1, y1, x2, y2] = origCoords[i];
+        area.coords = [
+          Math.round(x1 * scaleX),
+          Math.round(y1 * scaleY),
+          Math.round(x2 * scaleX),
+          Math.round(y2 * scaleY),
+        ].join(',');
+      });
+    }
+
+    img.addEventListener('load', scaleMap);
+    window.addEventListener('resize', scaleMap);
+    if (img.complete) scaleMap();
+  </script>
+</body>
+</html>
