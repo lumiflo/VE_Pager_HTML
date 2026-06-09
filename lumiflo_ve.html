@@ -6,29 +6,34 @@
   <title>Lumiflo - Virtual Entertainment</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
+    html, body {
       background-color: #0a0a0a;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      min-height: 100vh;
     }
     .container {
       position: relative;
       display: inline-block;
-      max-width: 943px;
       width: 100%;
+      max-width: 943px;
     }
     img#main {
       width: 100%;
       height: auto;
       display: block;
+      /* embed 창 높이에 맞게 축소 */
+      max-height: 100vh;
+      object-fit: contain;
     }
-    /* 클릭 영역 오버레이 */
     .hotspot {
       position: absolute;
       cursor: pointer;
-      /* 개발 확인용: border: 2px solid rgba(255,255,0,0.5); */
     }
     .hotspot:hover {
       background: rgba(255, 255, 255, 0.08);
@@ -40,7 +45,6 @@
   <div class="container" id="container">
     <img id="main" src="VE_HTML_Source.png" alt="Lumiflo VE Pager" usemap="#vemap">
 
-    <!-- 이미지맵 (원본 943x2000 기준 좌표) -->
     <map name="vemap">
       <!-- MY:RAKL YouTube -->
       <area shape="rect" coords="30,1843,311,1870"
@@ -62,7 +66,6 @@
   </div>
 
   <script>
-    // 이미지 리사이즈 시 이미지맵 좌표 자동 스케일링
     const img = document.getElementById('main');
     const originalWidth = 943;
     const originalHeight = 2000;
@@ -73,10 +76,10 @@
 
       const areas = document.querySelectorAll('map[name="vemap"] area');
       const origCoords = [
-        [30, 1843, 311, 1870],   // MY:RAKL
-        [329, 1843, 611, 1870],  // Plan.B
-        [629, 1843, 909, 1870],  // Weekly
-        [753, 1914, 885, 1964],  // 문의하기
+        [30, 1843, 311, 1870],
+        [329, 1843, 611, 1870],
+        [629, 1843, 909, 1870],
+        [753, 1914, 885, 1964],
       ];
 
       areas.forEach((area, i) => {
