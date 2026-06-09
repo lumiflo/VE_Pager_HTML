@@ -9,57 +9,45 @@
     html, body {
       background-color: #0a0a0a;
       width: 100%;
-      height: 100%;
-      overflow: hidden;
     }
     body {
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column;
+      align-items: center;
     }
     .container {
       position: relative;
-      display: inline-block;
       width: 100%;
       max-width: 943px;
     }
-    img#main {
+    .container img {
       width: 100%;
       height: auto;
       display: block;
-      /* embed 창 높이에 맞게 축소 */
-      max-height: 100vh;
-      object-fit: contain;
-    }
-    .hotspot {
-      position: absolute;
-      cursor: pointer;
-    }
-    .hotspot:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 4px;
     }
   </style>
 </head>
 <body>
-  <div class="container" id="container">
-    <img id="main" src="VE_HTML_Source.png" alt="Lumiflo VE Pager" usemap="#vemap">
 
+  <!-- 위쪽: 일반 이미지 -->
+  <div class="container">
+    <img src="VE_top.png" alt="Lumiflo VE - Top">
+  </div>
+
+  <!-- 아래쪽: 클릭 영역 이미지맵 -->
+  <div class="container" id="bottom">
+    <img id="main" src="VE_bottom.png" alt="Lumiflo VE - References" usemap="#vemap">
     <map name="vemap">
-      <!-- MY:RAKL YouTube -->
-      <area shape="rect" coords="30,1843,311,1870"
+      <area shape="rect" coords="30,433,311,460"
             href="https://www.youtube.com/live/d6JMU5EJX7c?si=Mt1zte04Uhl2d9WO"
             target="_blank" alt="MY:RAKL YouTube">
-      <!-- Plan.B Music YouTube -->
-      <area shape="rect" coords="329,1843,611,1870"
+      <area shape="rect" coords="329,433,611,460"
             href="https://youtu.be/QmycldYpVaM?si=WcsCUUzo4cUOSraX"
             target="_blank" alt="Plan.B Music YouTube">
-      <!-- Weekly Challenge YouTube -->
-      <area shape="rect" coords="629,1843,909,1870"
+      <area shape="rect" coords="629,433,909,460"
             href="https://youtube.com/shorts/qhMSbxEUyb8?si=Bt3s64XNZ09-aXLK"
             target="_blank" alt="Weekly Challenge YouTube">
-      <!-- 문의하기 -->
-      <area shape="rect" coords="753,1914,885,1964"
+      <area shape="rect" coords="753,504,885,554"
             href="https://lumiflo.channel.io/home"
             target="_blank" alt="문의하기">
     </map>
@@ -68,7 +56,7 @@
   <script>
     const img = document.getElementById('main');
     const originalWidth = 943;
-    const originalHeight = 2000;
+    const originalHeight = 590;
 
     function scaleMap() {
       const scaleX = img.offsetWidth / originalWidth;
@@ -76,10 +64,10 @@
 
       const areas = document.querySelectorAll('map[name="vemap"] area');
       const origCoords = [
-        [30, 1843, 311, 1870],
-        [329, 1843, 611, 1870],
-        [629, 1843, 909, 1870],
-        [753, 1914, 885, 1964],
+        [30,  433, 311, 460],
+        [329, 433, 611, 460],
+        [629, 433, 909, 460],
+        [753, 504, 885, 554],
       ];
 
       areas.forEach((area, i) => {
